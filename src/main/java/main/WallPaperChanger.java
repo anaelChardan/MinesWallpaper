@@ -53,16 +53,29 @@ public class WallPaperChanger {
             return;
         }
 
+        if (args.length > 0 && args[0].equals("--default")) {
+            try {
+                setWallpaper(getFile("wallpapers/DEFAULT.jpg"));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return;
+        }
+
         Lesson cours =  schedule.getCurrentCours();
         String photo_path = "wallpapers/DEFAULT.jpg";
 
         if (null != cours)
         {
+            System.out.println("On est en cours");
             if (getFile("wallpapers/"+cours.getTeacherNormalized()+".jpg").exists())
             {
                 photo_path = "wallpapers/"+ cours.getTeacherNormalized()+".jpg";
             }
         }
+
+        System.out.println(photo_path);
 
         try {
             if (!getFile(photo_path).exists())
